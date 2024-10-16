@@ -1,12 +1,25 @@
 import Country from "./Country";
+
+import { useState, useEffect } from "react";
+
 const Countries = ({ countries, filterValue }) => {
-  const countriesToShow = countries.filter((country) =>
-    !filterValue
-      ? true
-      : country.name.common.toLowerCase().includes(filterValue.toLowerCase())
-  );
+  const [countriesToShow, setCountriesToShow] = useState([]);
+  useEffect(() => {
+    setCountriesToShow(
+      countries.filter((country) =>
+        country.name.common.toLowerCase().includes(filterValue.toLowerCase())
+      )
+    );
+  }, [filterValue]);
 
   const totalOfCountriesDisplayed = countriesToShow.length;
+
+  const handleShowCountry = (id) => {
+    const selectedCountry = countries.find((country) => country.ccn3 === id);
+    if (selectedCountry) {
+      setCountriesToShow([selectedCountry]);
+    }
+  };
 
   return (
     <div>
@@ -15,7 +28,12 @@ const Countries = ({ countries, filterValue }) => {
       ) : totalOfCountriesDisplayed > 1 ? (
         <ul>
           {countriesToShow.map((country) => (
-            <li key={country.ccn3}>{country.name.common}</li>
+            <li key={country.ccn3}>
+              {country.name.common}
+              <button onClick={() => handleShowCountry(country.ccn3)}>
+                Show
+              </button>
+            </li>
           ))}
         </ul>
       ) : totalOfCountriesDisplayed === 1 ? (

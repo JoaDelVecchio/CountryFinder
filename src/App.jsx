@@ -7,17 +7,22 @@ function App() {
   const [filterValue, setFilterValue] = useState("");
   const [countries, setCountries] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    countriesServices
+    const promise = countriesServices
       .getAll()
-      .then((data) => setCountries(data))
+      .then((data) => {
+        setCountries(data), setLoading(false);
+      })
       .catch((err) => {
-        setError(err), console.error(err);
+        setError(err), console.error(err), setLoading(false);
       });
   }, []);
 
-  return (
+  return loading ? (
+    <h1>Loading...</h1>
+  ) : (
     <>
       <h1>Country Finder</h1>
       <Filter filterValue={filterValue} setFilterValue={setFilterValue} />
