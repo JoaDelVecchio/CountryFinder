@@ -4,7 +4,7 @@ import Filter from "./components/Filter";
 import Countries from "./components/Countries";
 
 function App() {
-  const [filterValue, setFilterValue] = useState(null);
+  const [filterValue, setFilterValue] = useState("");
   const [countries, setCountries] = useState([]);
   const [error, setError] = useState(null);
 
@@ -21,7 +21,11 @@ function App() {
     <>
       <h1>Country Finder</h1>
       <Filter filterValue={filterValue} setFilterValue={setFilterValue} />
-      {error ? <p>{error}</p> : <Countries countries={countries} />}
+      {error ? (
+        <p>{error}</p>
+      ) : (
+        <Countries countries={countries} filterValue={filterValue} />
+      )}
     </>
   );
 }
