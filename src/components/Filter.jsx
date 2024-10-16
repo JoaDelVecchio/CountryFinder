@@ -1,6 +1,6 @@
 const Filter = ({ setFilterValue, filterValue }) => {
   <div>
-    find countries
+    <p>find countries</p>
     <input
       type="text"
       placeholder="find countries"
