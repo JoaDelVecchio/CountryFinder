@@ -1,9 +1,9 @@
-import Country from "./Country";
-
 import { useState, useEffect } from "react";
+import Country from "./Country";
 
 const Countries = ({ countries, filterValue }) => {
   const [countriesToShow, setCountriesToShow] = useState([]);
+
   useEffect(() => {
     setCountriesToShow(
       countries.filter((country) =>

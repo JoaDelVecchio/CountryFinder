@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+
 const Country = ({ country }) => {
   const apiKey = import.meta.env.VITE_OPENWEATHER_KEY;
-
   const [weather, setWeatherData] = useState(null);
   const capital = country.capital ? country.capital[0] : "";
 
@@ -18,7 +18,7 @@ const Country = ({ country }) => {
   return (
     <div>
       <h2>{country.name.common}</h2>
-      <p>{country.capital}</p>
+      <p>Capital: {capital}</p>
       <h3>Languages:</h3>
       <ul>
         {Object.values(country.languages).map((language, i) => (
@@ -30,7 +30,8 @@ const Country = ({ country }) => {
         alt={country.flags.alt}
       />
       {weather && (
-        <div>
+        <div className="weather">
+          <h3>Weather in {capital}</h3>
           <p>Temperature: {weather.main.temp}°C</p>
           <p>Wind: {weather.wind.speed} m/s</p>
           <img

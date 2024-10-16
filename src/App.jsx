@@ -13,25 +13,32 @@ function App() {
     const promise = countriesServices
       .getAll()
       .then((data) => {
-        setCountries(data), setLoading(false);
+        setCountries(data);
+        setLoading(false);
       })
       .catch((err) => {
-        setError(err), console.error(err), setLoading(false);
+        setError(err);
+        console.error(err);
+        setLoading(false);
       });
   }, []);
 
-  return loading ? (
-    <h1>Loading...</h1>
-  ) : (
-    <>
-      <h1>Country Finder</h1>
-      <Filter filterValue={filterValue} setFilterValue={setFilterValue} />
-      {error ? (
-        <p>{error}</p>
+  return (
+    <div className="container">
+      {loading ? (
+        <h1>Loading...</h1>
       ) : (
-        <Countries countries={countries} filterValue={filterValue} />
+        <>
+          <h1>Country Finder</h1>
+          <Filter filterValue={filterValue} setFilterValue={setFilterValue} />
+          {error ? (
+            <p>{error}</p>
+          ) : (
+            <Countries countries={countries} filterValue={filterValue} />
+          )}
+        </>
       )}
-    </>
+    </div>
   );
 }
 

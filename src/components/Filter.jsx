@@ -3,7 +3,7 @@ const Filter = ({ setFilterValue, filterValue }) => {
     <div>
       <input
         type="text"
-        placeholder="find countries"
+        placeholder="Find countries"
         value={filterValue}
         onChange={(e) => setFilterValue(e.target.value)}
       />
